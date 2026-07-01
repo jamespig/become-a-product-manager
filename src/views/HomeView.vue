@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowRight, BookOpen, LayoutDashboard, Presentation, Route, Target, Workflow } from '@lucide/vue'
+import { ArrowRight, BarChart3, BookOpen, LayoutDashboard, Presentation, Route, Target, Workflow } from '@lucide/vue'
 import { RouterLink } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { pmWorkflowSkills } from '@/content/skills/pmWorkflows'
@@ -54,6 +54,12 @@ const dashboardStats = [
             <Button variant="secondary" class="gap-2">
               <Presentation class="size-4" />
               社區主題進度
+            </Button>
+          </RouterLink>
+          <RouterLink to="/yoxi">
+            <Button variant="secondary" class="gap-2">
+              <BarChart3 class="size-4" />
+              yoxi 主題分析
             </Button>
           </RouterLink>
           <RouterLink to="/skills/pm-workflows">

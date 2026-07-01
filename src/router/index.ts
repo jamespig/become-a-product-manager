@@ -4,9 +4,11 @@ import CommunityManagementLayoutView from '@/views/CommunityManagementLayoutView
 import CommunityManagementView from '@/views/CommunityManagementView.vue'
 import CommunityOverviewView from '@/views/CommunityOverviewView.vue'
 import CommunityPlanningView from '@/views/CommunityPlanningView.vue'
+import CommunityYoxiDataView from '@/views/CommunityYoxiDataView.vue'
 import HomeView from '@/views/HomeView.vue'
 import SkillDetailView from '@/views/SkillDetailView.vue'
 import SkillsView from '@/views/SkillsView.vue'
+import YoxiLayoutView from '@/views/YoxiLayoutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +57,22 @@ const router = createRouter({
           path: 'design-system',
           name: 'community-management-design-system',
           component: CommunityDesignSystemView,
+        },
+      ],
+    },
+    {
+      path: '/yoxi',
+      name: 'yoxi',
+      component: YoxiLayoutView,
+      children: [
+        {
+          path: '',
+          redirect: '/yoxi/visualization',
+        },
+        {
+          path: 'visualization',
+          name: 'yoxi-visualization',
+          component: CommunityYoxiDataView,
         },
       ],
     },
