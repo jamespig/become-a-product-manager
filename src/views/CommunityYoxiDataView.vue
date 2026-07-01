@@ -23,6 +23,11 @@ import {
   weekdayDemand,
   yoxiOverviewMetrics,
 } from '@/content/topics/yoxiAnalysis'
+import {
+  nonStationCategories,
+  nonStationHighFreqPlaces,
+  nonStationSummary,
+} from '@/content/topics/yoxiNonStation'
 
 ChartJS.register(
   Title,
@@ -215,6 +220,98 @@ const percentChartOptions = {
               </p>
             </li>
           </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="rounded-2xl border bg-card p-6">
+      <h3 class="font-semibold">排除車站後的高頻場所（全列）</h3>
+      <p class="mt-2 text-sm text-muted-foreground">
+        已排除高鐵/火車站/捷運/機場/轉運等站點關鍵字。命名地點共 {{ nonStationSummary.namedTotal.toLocaleString() }} 筆，其中非車站地點
+        {{ nonStationSummary.nonStationNamedTotal.toLocaleString() }} 筆（{{ nonStationSummary.nonStationRatioPct }}%）。
+      </p>
+
+      <div class="mt-4 grid gap-4 md:grid-cols-3">
+        <article class="rounded-xl border bg-muted/20 p-4">
+          <p class="text-xs text-muted-foreground">高頻門檻</p>
+          <p class="mt-2 text-2xl font-semibold">>= {{ nonStationSummary.highFreqThreshold }}</p>
+          <p class="mt-2 text-sm text-muted-foreground">只保留高頻地點，確保清單可操作。</p>
+        </article>
+        <article class="rounded-xl border bg-muted/20 p-4">
+          <p class="text-xs text-muted-foreground">高頻地點總數</p>
+          <p class="mt-2 text-2xl font-semibold">{{ nonStationSummary.highFreqPlacesCount }}</p>
+          <p class="mt-2 text-sm text-muted-foreground">以下地點已完整列出。</p>
+        </article>
+        <article class="rounded-xl border bg-muted/20 p-4">
+          <p class="text-xs text-muted-foreground">分類數量</p>
+          <p class="mt-2 text-2xl font-semibold">{{ nonStationCategories.length }}</p>
+          <p class="mt-2 text-sm text-muted-foreground">顯示各類別上下車分布差異。</p>
+        </article>
+      </div>
+
+      <div class="mt-6 grid gap-6 xl:grid-cols-2">
+        <article class="rounded-xl border bg-muted/20 p-5">
+          <h4 class="font-medium">高頻分類（排除車站）</h4>
+          <div class="mt-3 overflow-hidden rounded-md border">
+            <div class="max-h-96 overflow-auto">
+              <table class="w-full text-sm">
+                <thead class="sticky top-0 bg-background">
+                  <tr class="text-left text-muted-foreground">
+                    <th class="px-3 py-2 font-medium">分類</th>
+                    <th class="px-3 py-2 font-medium">總筆數</th>
+                    <th class="px-3 py-2 font-medium">上車</th>
+                    <th class="px-3 py-2 font-medium">下車</th>
+                    <th class="px-3 py-2 font-medium">占比</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="item in nonStationCategories"
+                    :key="item.category"
+                    class="border-t"
+                  >
+                    <td class="px-3 py-2">{{ item.category }}</td>
+                    <td class="px-3 py-2">{{ item.count.toLocaleString() }}</td>
+                    <td class="px-3 py-2">{{ item.pickup_count.toLocaleString() }}</td>
+                    <td class="px-3 py-2">{{ item.dropoff_count.toLocaleString() }}</td>
+                    <td class="px-3 py-2">{{ item.pct_of_named_non_station }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-xl border bg-muted/20 p-5">
+          <h4 class="font-medium">高頻地點全清單（排除車站）</h4>
+          <div class="mt-3 overflow-hidden rounded-md border">
+            <div class="max-h-96 overflow-auto">
+              <table class="w-full text-sm">
+                <thead class="sticky top-0 bg-background">
+                  <tr class="text-left text-muted-foreground">
+                    <th class="px-3 py-2 font-medium">地點</th>
+                    <th class="px-3 py-2 font-medium">總筆數</th>
+                    <th class="px-3 py-2 font-medium">上車</th>
+                    <th class="px-3 py-2 font-medium">下車</th>
+                    <th class="px-3 py-2 font-medium">占比</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="item in nonStationHighFreqPlaces"
+                    :key="item.place"
+                    class="border-t align-top"
+                  >
+                    <td class="px-3 py-2">{{ item.place }}</td>
+                    <td class="px-3 py-2">{{ item.count.toLocaleString() }}</td>
+                    <td class="px-3 py-2">{{ item.pickup_count.toLocaleString() }}</td>
+                    <td class="px-3 py-2">{{ item.dropoff_count.toLocaleString() }}</td>
+                    <td class="px-3 py-2">{{ item.pct_of_named_non_station }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </article>
       </div>
     </section>

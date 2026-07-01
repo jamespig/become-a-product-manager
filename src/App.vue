@@ -37,7 +37,10 @@ const themeNavGroups: ThemeNavGroup[] = [
     id: 'yoxi',
     label: 'yoxi',
     basePath: '/yoxi',
-    items: [{ to: '/yoxi/visualization', label: '數據視覺化分析' }],
+    items: [
+      { to: '/yoxi/visualization', label: '數據視覺化分析' },
+      { to: '/yoxi/candidates', label: '功能選手池' },
+    ],
   },
 ]
 

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { BarChart3 } from '@lucide/vue'
+import { BarChart3, Lightbulb } from '@lucide/vue'
 import { RouterLink, RouterView } from 'vue-router'
 
 const navItems = [
   { to: '/yoxi/visualization', label: '數據視覺化', icon: BarChart3 },
+  { to: '/yoxi/candidates', label: '功能選手', icon: Lightbulb },
 ]
 </script>
 

@@ -8,6 +8,7 @@ import CommunityYoxiDataView from '@/views/CommunityYoxiDataView.vue'
 import HomeView from '@/views/HomeView.vue'
 import SkillDetailView from '@/views/SkillDetailView.vue'
 import SkillsView from '@/views/SkillsView.vue'
+import YoxiFeatureCandidatesView from '@/views/YoxiFeatureCandidatesView.vue'
 import YoxiLayoutView from '@/views/YoxiLayoutView.vue'
 
 const router = createRouter({
@@ -73,6 +74,11 @@ const router = createRouter({
           path: 'visualization',
           name: 'yoxi-visualization',
           component: CommunityYoxiDataView,
+        },
+        {
+          path: 'candidates',
+          name: 'yoxi-candidates',
+          component: YoxiFeatureCandidatesView,
         },
       ],
     },
